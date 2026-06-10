@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Shortcut Memo Clip</title>
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app" id="app">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Windows / Mac Shortcut Dictionary</p>
+        <h1>Shortcut Memo Clip</h1>
+      </div>
+      <button class="icon-btn" id="installBtn" hidden>インストール</button>
+    </header>
+
+    <section class="search-panel">
+      <input id="searchInput" class="search-input" type="search" autocomplete="off" placeholder="検索：スクショ、写真、コピー、設定、画面撮影..." />
+      <div class="search-meta" id="searchMeta">検索結果 0件</div>
+    </section>
+
+    <nav class="tabs" aria-label="メインタブ">
+      <button class="tab is-active" data-tab="shortcuts">ショートカット</button>
+      <button class="tab" data-tab="notes">メモ</button>
+      <button class="tab" data-tab="clips">クリップボード</button>
+      <button class="tab" data-tab="settings">設定</button>
+    </nav>
+
+    <section class="toolbar" id="shortcutToolbar">
+      <div class="os-switch" aria-label="OS切り替え">
+        <button class="os-seg is-active" data-os="windows">Windows</button>
+        <button class="os-seg" data-os="mac">Mac</button>
+      </div>
+      <div class="segmented">
+        <button class="seg is-active" data-filter="all">すべて</button>
+        <button class="seg" data-filter="frequent">よく使う</button>
+        <button class="seg" data-filter="others">その他</button>
+        <button class="seg" data-filter="custom">自分で追加</button>
+      </div>
+      <select id="categoryFilter" class="select" aria-label="カテゴリ">
+        <option value="all">すべてのカテゴリ</option>
+      </select>
+      <button class="btn primary" id="addShortcutBtn" data-action="add-shortcut">＋ ショートカット追加</button>
+    </section>
+
+    <section class="content">
+      <div id="shortcuts" class="panel is-active"></div>
+      <div id="notes" class="panel"></div>
+      <div id="clips" class="panel"></div>
+      <div id="settings" class="panel"></div>
+    </section>
+
+    <div class="toast" id="toast" role="status"></div>
+  </main>
+
+  <script>
+    window.__appErrors = [];
+    window.addEventListener('error', function(event) {
+      window.__appErrors.push((event.message || 'Error') + ' @ ' + (event.filename || '') + ':' + (event.lineno || 0));
+    });
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
