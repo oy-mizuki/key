@@ -33,20 +33,22 @@
     </nav>
 
     <section class="toolbar" id="shortcutToolbar">
-      <div class="os-switch" aria-label="OS切り替え">
-        <button class="os-seg is-active" data-os="windows">Windows</button>
-        <button class="os-seg" data-os="mac">Mac</button>
-      </div>
-      <div class="segmented">
-        <button class="seg is-active" data-filter="all">すべて</button>
-        <button class="seg" data-filter="frequent">よく使う</button>
-        <button class="seg" data-filter="others">その他</button>
-        <button class="seg" data-filter="custom">自分で追加</button>
+      <div class="toolbar-row">
+        <div class="segmented" aria-label="OS切り替え">
+          <button class="os-btn is-active" data-os="windows">Windows</button>
+          <button class="os-btn" data-os="mac">Mac</button>
+        </div>
+        <div class="segmented" aria-label="表示切り替え">
+          <button class="seg is-active" data-filter="all">すべて</button>
+          <button class="seg" data-filter="frequent">よく使う</button>
+          <button class="seg" data-filter="others">その他</button>
+          <button class="seg" data-filter="custom">自分で追加</button>
+        </div>
       </div>
       <select id="categoryFilter" class="select" aria-label="カテゴリ">
         <option value="all">すべてのカテゴリ</option>
       </select>
-      <button class="btn primary" id="addShortcutBtn" data-action="add-shortcut">＋ ショートカット追加</button>
+      <button class="btn primary add-shortcut-btn" data-action="add-shortcut">＋ ショートカット追加</button>
     </section>
 
     <section class="content">

@@ -1,31 +1,44 @@
 # Shortcut Memo Clip PWA
 
-パソコン初心者向けのWindows・Chromeショートカット辞典、メモ、クリップボード手動保存をまとめた軽量PWAです。
+Windows / Mac のショートカット辞典、メモ、クリップボード手動保存をまとめた軽量PWAです。
 
-## 今回の主な仕様
+## 主な修正
 
-- ショートカットは「削除」ではなく「よく使う / その他」で整理
-- WindowsとChromeの日常的で便利なショートカットを辞典データとして固定
-- ウェブ開発、デザインツールなどの専門ショートカットは収録しない
-- よく使うマーク、色、表示方法を設定画面で変更可能
-- 背景パネルの透明度とぼかしを設定画面で調整可能
-- 検索は省略・曖昧検索に対応
-  - スクショ / スクリーンショット / 写真 / 画像 / キャプチャ
-  - コピー / copy / コピ
-  - 設定 / settings
-- 検索ハイライト、件数表示、カテゴリ絞り込み対応
-- メモ、クリップボードは編集・削除・ピン留め対応
-- クリップボードは最大50個
-- 全データ書き出し / 読み込み対応
-- オフライン対応
+- `Cannot access 'state' before initialization` を修正
+- 初期表示でショートカット一覧が必ず表示されるように修正
+- Windows / Mac 切り替えを追加
+- Mac用ショートカットを追加
+- ショートカット追加・編集・削除を追加
+- 標準ショートカットは削除不可
+- ユーザー追加ショートカットのみ編集・削除可能
+- 「自分で追加」フィルタを追加
+- OS別によく使うを保存
+- Service Workerのキャッシュ名を更新し、古いキャッシュ対策を追加
 
-## 使い方
+## GitHub Pages へのアップロード
 
-1. フォルダ内で `python3 -m http.server 8080` を実行
-2. Chromeで `http://localhost:8080/` を開く
-3. 画面右上の「インストール」またはChromeのアドレスバーのインストールボタンから追加
-4. 必要に応じてGitHub PagesなどHTTPS環境へアップロード
+リポジトリ直下に以下がある状態でアップロードしてください。
 
-## 補足
+- index.html
+- app.js
+- styles.css
+- sw.js
+- manifest.webmanifest
+- assets/
+- icons/
 
-PWAのため、独自のショートカットキーをOS全体へ直接割り当てることはできません。
+公開URLは以下のようにルートで開く想定です。
+
+```txt
+https://ユーザー名.github.io/リポジトリ名/
+```
+
+## 表示が変わらない場合
+
+Chromeで以下を実行してください。
+
+1. Command + Shift + R で強制更新
+2. DevTools → Application → Service Workers → Unregister
+3. DevTools → Application → Storage → Clear site data
+4. 再読み込み
+
