@@ -340,10 +340,10 @@ function bind(){
     if(action==='pin-note'){ const n=state.notes.find(x=>x.id===id); if(n) n.pinned=!n.pinned; render(); return; }
     if(action==='edit-note'){ const n=state.notes.find(x=>x.id===id); if(!n) return; const title=prompt('タイトル', n.title); if(title===null)return; const body=prompt('内容', n.body); if(body===null)return; n.title=title.trim()||n.title; n.body=body.trim()||n.body; render(); return; }
     if(action==='delete-note'){ const n=state.notes.find(x=>x.id===id); if(n&&confirmDelete('このメモを削除しますか？')){ state.notes=state.notes.filter(x=>x.id!==id); pushUndo('note',n); render(); } return; }
-    if(action==='add-clip'){ const text=$('#clipText').value.trim(); if(!text) return toast('保存するテキストを入力してください'); state.clips.unshift({id:uid(),text,pinned:false,createdAt:now()}); capClips(); render(); toast('保存しました'); return; }
+    if(action==='add-clip'){ const text=$('#clipText').value; if(!text) return toast('保存するテキストを入力してください'); state.clips.unshift({id:uid(),text,pinned:false,createdAt:now()}); capClips(); render(); toast('保存しました'); return; }
     if(action==='copy-clip'){ const c=state.clips.find(x=>x.id===id); if(c) copyText(c.text); return; }
     if(action==='pin-clip'){ const c=state.clips.find(x=>x.id===id); if(c) c.pinned=!c.pinned; render(); return; }
-    if(action==='edit-clip'){ const c=state.clips.find(x=>x.id===id); if(!c)return; const text=prompt('内容', c.text); if(text===null)return; c.text=text.trim()||c.text; render(); return; }
+    if(action==='edit-clip'){ const c=state.clips.find(x=>x.id===id); if(!c)return; const text=prompt('内容', c.text); if(text===null)return; c.text=text||c.text; render(); return; }
     if(action==='delete-clip'){ const c=state.clips.find(x=>x.id===id); if(c&&confirmDelete('このクリップを削除しますか？')){ state.clips=state.clips.filter(x=>x.id!==id); pushUndo('clip',c); render(); } return; }
     if(action==='export-data'){ const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='shortcut-memo-clip-backup.json'; a.click(); URL.revokeObjectURL(a.href); return; }
     if(action==='import-data'){ $('#importFile')?.click(); return; }

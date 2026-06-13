@@ -1,0 +1,30 @@
+git add .
+git commit -m "index"
+git push origin main
+
+
+画面上部にすでに「メモ内容」を入力する大きな枠（textarea）がありますよね。
+これを利用して、「編集ボタンを押したら、そのテキストを上部の入力欄に戻す（そして古いものは消す）」という動きにするのが最も簡単です。
+
+現在の if(action==='edit-clip'){ ... } の部分を、以下のように書き換えてみてください。
+
+if(action==='edit-clip'){ 
+      const c = state.clips.find(x => x.id === id); 
+      if(!c) return; 
+
+      // 1. 上部の「メモ内容」入力欄を探して、編集したいテキストを入れる
+      // ※ document.querySelector('textarea') は画面内の最初のtextareaを取得します
+      const textarea = document.querySelector('textarea'); 
+      if(textarea) {
+        textarea.value = c.text;
+        textarea.focus(); // 入力欄に自動でカーソルを合わせる
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // 画面の一番上へスクロール
+      }
+
+      // 2. 元のメモを一覧から削除する
+      // （内容を修正した後、再度「メモを追加」ボタンで保存してもらう仕組みです）
+      state.clips = state.clips.filter(x => x.id !== id); 
+      render(); 
+
+      return; 
+    }
